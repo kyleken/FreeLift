@@ -85,3 +85,7 @@ The code is in the **private** repository `kyleken/FreeLift` (branch `main`; thi
 folder is the repository root). `target/` and `dist/*.apk` are not committed: each installed
 build goes up as a GitHub Release (`gh release create vX.Y.Z dist/FreeLift.apk`) with its md5
 in the notes. Push only when the owner asks.
+
+Licence: Apache 2.0 (`LICENSE`, `NOTICE`). Keep the safety / liability notice at the top of
+`README.md`; the owner has been advised to have a lawyer check it before making the
+repository public.

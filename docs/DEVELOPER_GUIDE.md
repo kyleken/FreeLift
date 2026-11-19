@@ -12,7 +12,8 @@ Companion files:
 | `CLAUDE.md` | Short orientation and the owner's rules (Claude Code loads it automatically). |
 | `MECHANICS.md` | Every value, formula and rule taken from the original app, with the routine address in `libapp.so` and how it was found (passes 1–10). |
 | `mechanics.json` | The same values in machine-readable form (`source` = where it came from, `estimated: true` = our own choice). |
-| `README.md` | The GitHub front page: what Free Lift is, safety notes, where to read next. |
+| `README.md` | The GitHub front page: the safety and liability notice, what Free Lift is, where to read next. |
+| `LICENSE`, `NOTICE` | Apache License 2.0 (no warranty, limited liability); copyright, trademark note and the licences of the bundled sherpa-onnx, ONNX Runtime and speech model. |
 | `ANDROID.md` | Short user-facing notes: the screen, freeing the machine, voice, installing. |
 | `dist/FreeLift.apk` | The latest signed APK. |
 
