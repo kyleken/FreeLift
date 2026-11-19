@@ -1,0 +1,445 @@
+{
+  "version": 1,
+  "values": [
+    {
+      "name": "lb per kg",
+      "group": "units",
+      "value": 2.2,
+      "unit": "lb/kg",
+      "source": "function 0x3934a84 (pp+0x202fa0 = 2.2) and assets/9kg.txt frames"
+    },
+    {
+      "name": "base cable tension (weight off)",
+      "group": "weight",
+      "value": 3.5,
+      "unit": "kg",
+      "source": "assets/9kg.txt idle frames: 7.7 lb"
+    },
+    {
+      "name": "min weight per side (kg)",
+      "group": "weight",
+      "value": 3.5,
+      "unit": "kg",
+      "source": "function 0x1c41778"
+    },
+    {
+      "name": "min weight per side (lb)",
+      "group": "weight",
+      "value": 8.0,
+      "unit": "lb",
+      "source": "function 0x1c41778"
+    },
+    {
+      "name": "min weight total (kg)",
+      "group": "weight",
+      "value": 7.0,
+      "unit": "kg",
+      "source": "function 0x1c41778"
+    },
+    {
+      "name": "min weight total (lb)",
+      "group": "weight",
+      "value": 16.0,
+      "unit": "lb",
+      "source": "function 0x1c41778"
+    },
+    {
+      "name": "max weight total (kg)",
+      "group": "weight",
+      "value": 100.0,
+      "unit": "kg",
+      "source": "function 0x1c2dc80 (pp+0x151b20)"
+    },
+    {
+      "name": "max weight total, 2S/3S/Ultra (kg)",
+      "group": "weight",
+      "value": 120.0,
+      "unit": "kg",
+      "source": "function 0x1c2dc80 (pp+0x1f52a8)"
+    },
+    {
+      "name": "max weight total (lb)",
+      "group": "weight",
+      "value": 220.0,
+      "unit": "lb",
+      "source": "function 0x1c2dc80 (pp+0x1ed3a8)"
+    },
+    {
+      "name": "max weight total, 2S/3S/Ultra (lb)",
+      "group": "weight",
+      "value": 260.0,
+      "unit": "lb",
+      "source": "function 0x1c2dc80 (pp+0x203600)"
+    },
+    {
+      "name": "per-side max divisor",
+      "group": "weight",
+      "value": 2.0,
+      "source": "functions 0x39118f4, 0x39329a8, 0x3934a84"
+    },
+    {
+      "name": "fuzzy step threshold, one cable",
+      "group": "weight",
+      "value": 25.0,
+      "source": "function 0x3932ecc"
+    },
+    {
+      "name": "fuzzy step threshold, both cables",
+      "group": "weight",
+      "value": 50.0,
+      "source": "function 0x3932ecc (pp+0x1ed260)"
+    },
+    {
+      "name": "fuzzy step ratio at or below threshold (ceil)",
+      "group": "weight",
+      "value": 0.1,
+      "source": "function 0x3932ecc (pp+0x1ed270)"
+    },
+    {
+      "name": "fuzzy step ratio above threshold (floor)",
+      "group": "weight",
+      "value": 0.05,
+      "source": "function 0x3932ecc (pp+0x1528b8)"
+    },
+    {
+      "name": "weight shown with one decimal",
+      "group": "weight",
+      "value": true,
+      "source": "function 0x39117cc (_formatWeight)"
+    },
+    {
+      "name": "weight mode switch turns weight off first",
+      "group": "modes",
+      "value": true,
+      "source": "function 0x3cc0da4 (switchWeightMode)"
+    },
+    {
+      "name": "speed only settable in isokinetic mode",
+      "group": "modes",
+      "value": true,
+      "source": "function 0x3ccd4dc (setSpeed)"
+    },
+    {
+      "name": "weight change refused in speed mode",
+      "group": "modes",
+      "value": true,
+      "source": "function 0x391123c (voice_speed_mode_not_support_weight)"
+    },
+    {
+      "name": "extra weight needs its mode first",
+      "group": "modes",
+      "value": true,
+      "source": "keys sv_eccentric_mode_required / sv_chain_mode_required"
+    },
+    {
+      "name": "weight step (kg)",
+      "group": "weight",
+      "value": 0.5,
+      "unit": "kg",
+      "estimated": true
+    },
+    {
+      "name": "weight step (lb)",
+      "group": "weight",
+      "value": 1.0,
+      "unit": "lb",
+      "estimated": true
+    },
+    {
+      "name": "default weight per side (unit on screen)",
+      "group": "weight",
+      "value": 8.0,
+      "unit": "kg or lb",
+      "source": "function 0x3acda18 @0x3acdf70: double.tryParse(powerValue) ?? 8.0, clamped by 0x1c5021c"
+    },
+    {
+      "name": "default extra weight ratio",
+      "group": "modes",
+      "value": 0.5,
+      "source": "function 0x3acda18 @0x3ace0f4: _slider2Value ?? weight * 0.5"
+    },
+    {
+      "name": "extra weight cap ratio, chain",
+      "group": "modes",
+      "value": 1.5,
+      "source": "pool map pp+0x2035f0 {2: 1.5, 3: 0.5} used by 0x1c2d7ac: max(0, min(max - weight, weight * ratio))"
+    },
+    {
+      "name": "extra weight cap ratio, eccentric",
+      "group": "modes",
+      "value": 0.5,
+      "source": "pool map pp+0x2035f0 used by 0x1c2d7ac; 0x1c4fdf0 lowers the extra after a weight change"
+    },
+    {
+      "name": "values kept between visits",
+      "group": "training",
+      "value": "powerValue, speedPowerValue, speedMps, selectedModelID, selectedDeviceID, _slider2Value, isLbs",
+      "source": "saved in 0x1c4f0fc, read back in 0x3acda18"
+    },
+    {
+      "name": "isokinetic speed min",
+      "group": "modes",
+      "value": 0.1,
+      "unit": "m/s",
+      "estimated": true
+    },
+    {
+      "name": "isokinetic speed max",
+      "group": "modes",
+      "value": 1.0,
+      "unit": "m/s",
+      "estimated": true
+    },
+    {
+      "name": "isokinetic speed default",
+      "group": "modes",
+      "value": 0.4,
+      "unit": "m/s",
+      "estimated": true
+    },
+    {
+      "name": "assist levels",
+      "group": "modes",
+      "value": 2,
+      "source": "assets/hotwords_en.txt: 'level 1 assist', 'level 2 assist'"
+    },
+    {
+      "name": "weight modes",
+      "group": "modes",
+      "value": "standard, eccentric, chain, isokinetic",
+      "source": "assets/intent_vectors_en.json switch_weight_mode"
+    },
+    {
+      "name": "voice intents",
+      "group": "voice",
+      "value": 21,
+      "source": "assets/intent_vectors_en.json"
+    },
+    {
+      "name": "rest timer default",
+      "group": "training",
+      "value": 60,
+      "unit": "s",
+      "estimated": true,
+      "note": "the original has no preset rest length: it counts rest up (restElapsedSeconds)"
+    },
+    {
+      "name": "rest timer switch default",
+      "group": "training",
+      "value": true,
+      "source": "function 0x1c91bdc (key free_train_rest_switch_ built in 0x1c91c74)"
+    },
+    {
+      "name": "auto-add set after rest default",
+      "group": "training",
+      "value": true,
+      "source": "function 0x1c91a90 (key free_train_auto_add_set_after_rest_ built in 0x1c91b28)"
+    },
+    {
+      "name": "enter-rest countdown",
+      "group": "training",
+      "value": 6000,
+      "unit": "ms",
+      "source": "function 0x1c40d78 (RestCountdownController), not shown in the rebuild"
+    },
+    {
+      "name": "enter-rest ring fill time",
+      "group": "training",
+      "value": 4000,
+      "unit": "ms",
+      "source": "function 0x1c40d78 (RestCountdownController), not shown in the rebuild"
+    },
+    {
+      "name": "smart load off default",
+      "group": "training",
+      "value": true,
+      "source": "function 0x1f6e21c (autoOffWeight ?? 1; UnloadMode 0 manual, 1 smartInfinity, 2 smartFinite; saved in 0x3a74a2c)"
+    },
+    {
+      "name": "smart load off idle time",
+      "group": "training",
+      "value": 3.0,
+      "unit": "s",
+      "estimated": true
+    },
+    {
+      "name": "smart load off home tolerance (real machine)",
+      "group": "safety",
+      "value": 0.08,
+      "unit": "m",
+      "estimated": true
+    },
+    {
+      "name": "smart load off still tolerance (real machine)",
+      "group": "safety",
+      "value": 0.02,
+      "unit": "m",
+      "estimated": true
+    },
+    {
+      "name": "live data stale after",
+      "group": "safety",
+      "value": 0.5,
+      "unit": "s",
+      "estimated": true
+    },
+    {
+      "name": "weight-off check delay",
+      "group": "safety",
+      "value": 1.0,
+      "unit": "s",
+      "estimated": true
+    },
+    {
+      "name": "weight-off check force margin over base tension",
+      "group": "safety",
+      "value": 1.5,
+      "unit": "kg",
+      "estimated": true
+    },
+    {
+      "name": "weight-off re-sends before warning",
+      "group": "safety",
+      "value": 2,
+      "estimated": true
+    },
+    {
+      "name": "machine USB vendor id",
+      "group": "protocol",
+      "value": "0x0483",
+      "source": "UsbDriver.ScanDevices (classes7.dex)"
+    },
+    {
+      "name": "machine USB product id",
+      "group": "protocol",
+      "value": "0x5740",
+      "source": "UsbDriver.ScanDevices (classes7.dex)"
+    },
+    {
+      "name": "frame header",
+      "group": "protocol",
+      "value": "AA AB",
+      "source": "function 0x1b961dc (USB::dataRec) and assets/9kg.txt"
+    },
+    {
+      "name": "live data frame length",
+      "group": "protocol",
+      "value": 60,
+      "unit": "bytes",
+      "source": "assets/9kg.txt"
+    },
+    {
+      "name": "frame checksum",
+      "group": "protocol",
+      "value": "CRC-16/X-25, little-endian",
+      "source": "assets/9kg.txt (all 1,026 frames)"
+    },
+    {
+      "name": "serial baud rate",
+      "group": "protocol",
+      "value": 115200,
+      "unit": "baud",
+      "source": "stty on the tablet: /dev/ttyS5 held by the original app"
+    },
+    {
+      "name": "voice minimum confidence",
+      "group": "voice",
+      "value": "medium",
+      "estimated": true
+    },
+    {
+      "name": "set summary fields shown",
+      "group": "training",
+      "value": "weight, leftReps, rightReps, totalCapacity, avgPower, time, restDurationSec",
+      "source": "function 0x1ab8ad4 (FreeTrainSetSummaryEntity.toJson 0x3a61830)"
+    },
+    {
+      "name": "cable distance rule",
+      "group": "protocol",
+      "value": "distance = -round(second value, 4 decimals), metres",
+      "source": "function 0x1b9c29c"
+    },
+    {
+      "name": "torque field unit",
+      "group": "protocol",
+      "value": "lb, divided by 2.2 in kg mode",
+      "source": "function 0x1b9c29c"
+    },
+    {
+      "name": "command header",
+      "group": "protocol",
+      "value": "CC CD",
+      "source": "pool List<int> [0xcc, 0xcd] in builders calling 0x1994410"
+    },
+    {
+      "name": "heartbeat interval",
+      "group": "protocol",
+      "value": 500,
+      "unit": "ms",
+      "source": "function 0x1991060 (Duration 0x7a120 us)"
+    },
+    {
+      "name": "enable frame length",
+      "group": "protocol",
+      "value": 18,
+      "unit": "bytes",
+      "source": "function 0x3a9bdb0; tablet logger.db"
+    },
+    {
+      "name": "weight off command",
+      "group": "protocol",
+      "value": "CC CD 06 03 C3 9D (pause)",
+      "source": "function 0x1c69708; tablet logger.db"
+    },
+    {
+      "name": "device mode codes",
+      "group": "protocol",
+      "value": "standard 1, chain 2, eccentric 3, fixed speed 4",
+      "source": "function 0x3934a84"
+    },
+    {
+      "name": "command CRC byte order",
+      "group": "protocol",
+      "value": "high byte first",
+      "source": "function 0x1994410; tablet logger.db"
+    },
+    {
+      "name": "motor board port on the tablet",
+      "group": "protocol",
+      "value": "/dev/ttyS5",
+      "source": "/proc/<pid>/fd of com.speediance.faraday on the tablet"
+    },
+    {
+      "name": "two-player enable frame length",
+      "group": "protocol",
+      "value": 17,
+      "unit": "bytes",
+      "source": "function 0x3acafec"
+    },
+    {
+      "name": "two-player command bytes",
+      "group": "protocol",
+      "value": "A1 left, A2 right",
+      "source": "function 0x3acafec; callers 0x1c84154, 0x1c8445c"
+    },
+    {
+      "name": "command reply accepted code",
+      "group": "protocol",
+      "value": 1,
+      "source": "function 0x1b98ae0 (frame type 0x83)"
+    },
+    {
+      "name": "safety stop reasons",
+      "group": "protocol",
+      "value": "1 barbell unbalanced, 2 grip lost, 3 retraction too fast, 4 extension too fast, 5 motor too hot, 6 motor locked, else firmware error",
+      "source": "function 0x1b98cdc (frame type 0x82)"
+    },
+    {
+      "name": "gap between left and right two-player frames",
+      "group": "protocol",
+      "value": 50,
+      "unit": "ms",
+      "source": "function 0x1c84154 (Duration 0xc350 us, closure 0x1c8445c)"
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+# build output
+/target/
+# the APK is attached to GitHub Releases instead (43 MB per version)
+/dist/*.apk

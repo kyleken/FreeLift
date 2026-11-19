@@ -1,0 +1,78 @@
+[package]
+name = "freelift"
+version = "0.1.0"
+edition = "2021"
+# no desktop program: only the Android library is built
+autobins = false
+
+# Android only: `cargo build` targets the tablet (see .cargo/config.toml) and
+# `cargo apk build --release --lib` makes dist/FreeLift.apk. There is no Windows program.
+[lib]
+name = "freelift_core"
+crate-type = ["rlib", "cdylib"]
+
+[dependencies]
+eframe = { version = "0.33.3", default-features = false, features = ["default_fonts", "glow"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.154"
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[target.'cfg(target_os = "android")'.dependencies]
+eframe = { version = "0.33.3", default-features = false, features = ["default_fonts", "glow", "android-native-activity"] }
+winit = { version = "0.30", features = ["android-native-activity"] }
+jni = "0.21"
+# voice: microphone through AAudio, and the offline sherpa-onnx recogniser (its two .so files
+# are in android-libs/arm64-v8a and go into the APK through `runtime_libs` below)
+ndk = { version = "0.9", features = ["audio"] }
+sherpa-onnx = { version = "=2.0.1", default-features = false, features = ["shared"] }
+
+# the PC unit tests run the same recogniser on recorded speech (voice::tests)
+[target.'cfg(windows)'.dev-dependencies]
+sherpa-onnx = { version = "=2.0.1", default-features = false, features = ["shared"] }
+
+[profile.release]
+opt-level = 2
+
+# ---- Android APK (built with `cargo apk build --release --lib`) ----
+[package.metadata.android]
+package = "com.craftanything.freelift"
+apk_name = "FreeLift"
+build_targets = ["aarch64-linux-android"]
+# speech model files (copied to the app's own folder the first time voice starts)
+assets = "assets"
+# libsherpa-onnx-c-api.so and libonnxruntime.so (sherpa-onnx v2.0.1, Android arm64)
+runtime_libs = "android-libs"
+
+[[package.metadata.android.uses_permission]]
+name = "android.permission.RECORD_AUDIO"
+
+[package.metadata.android.sdk]
+min_sdk_version = 26
+target_sdk_version = 33
+
+[package.metadata.android.application]
+label = "Free Lift"
+
+[package.metadata.android.application.activity]
+orientation = "portrait"
+config_changes = "orientation|screenSize|screenLayout|keyboardHidden"
+# one Free Lift only: Home (when Free Lift is the home app) and the launcher icon bring back
+# the running one instead of starting a second copy that would also open the machine port
+launch_mode = "singleTask"
+
+# the launcher icon (cargo-apk adds this by itself only when no MAIN filter is listed)
+[[package.metadata.android.application.activity.intent_filter]]
+actions = ["android.intent.action.MAIN"]
+categories = ["android.intent.category.LAUNCHER"]
+
+# lets the owner pick Free Lift as the Home app (Settings › Apps › Default apps › Home app),
+# so it starts when the tablet powers up instead of the Speediance app
+[[package.metadata.android.application.activity.intent_filter]]
+actions = ["android.intent.action.MAIN"]
+categories = ["android.intent.category.HOME", "android.intent.category.DEFAULT"]
+
+[package.metadata.android.signing.release]
+path = "C:/Users/kylel/.android/debug.keystore"
+keystore_password = "android"

@@ -1,0 +1,12 @@
+# Free Lift is an Android-only app: a plain `cargo build` compiles it for the Gym Monster
+# tablet (arm64). `cargo apk build --release --lib` packages dist/FreeLift.apk.
+[build]
+target = "aarch64-linux-android"
+
+[target.aarch64-linux-android]
+linker = "C:/Users/kylel/AppData/Local/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/bin/aarch64-linux-android26-clang.cmd"
+ar = "C:/Users/kylel/AppData/Local/Android/Sdk/ndk/27.0.12077973/toolchains/llvm/prebuilt/windows-x86_64/bin/llvm-ar.exe"
+
+# PC unit tests: put the sherpa-onnx DLLs next to the test program first (tools/win-test-runner.cmd)
+[target.x86_64-pc-windows-msvc]
+runner = "tools/win-test-runner.cmd"
