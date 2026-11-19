@@ -910,6 +910,10 @@ MSYS_NO_PATHCONV=1 $ADB -s 192.168.2.50:5555 shell monkey -p com.craftanything.f
   `adb shell input` to check things on the screen: the Weight on button is close to the
   Setup buttons.
 
+**GitHub:** the private repository `kyleken/FreeLift` holds this folder (`main`). The APK is
+not committed (`.gitignore`); attach each build to a Release instead:
+`gh release create vX.Y.Z dist/FreeLift.apk --notes "…, md5 …"`.
+
 ### 6.3 Tablet facts
 
 * Rockchip RK3568, Android 11, 1080 × 1920 at density 240.

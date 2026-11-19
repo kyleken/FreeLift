@@ -78,3 +78,10 @@ When the tablet's Wi-Fi drops during the push, the owner puts the APK on a USB d
 it from `/mnt/media_rw/<id>/` on the tablet (guide §6.2).
 
 The full paths and environment variables are in the guide, section "Build, install, run".
+
+## GitHub
+
+The code is in the **private** repository `kyleken/FreeLift` (branch `main`; this `app/`
+folder is the repository root). `target/` and `dist/*.apk` are not committed: each installed
+build goes up as a GitHub Release (`gh release create vX.Y.Z dist/FreeLift.apk`) with its md5
+in the notes. Push only when the owner asks.
